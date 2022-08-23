@@ -1,16 +1,20 @@
-from flask import Flask, render_template
+from crypt import methods
+from urllib import request
+from flask import Flask, render_template,request
 from jinja2 import Environment
 
 app = Flask(__name__) # instantiation application
 
 @app.route("/")
-def home():
+def form():
     return  render_template ('index.html', title="L'Evaluateur de Prénom")
 
-@app.route("/visualise")
+@app.route("/visualise", methods= ['POST', 'GET'])
 def visualise():
-    return render_template('visualise.html', title = 'Raphaël', text = 'est un escargot tout chaud')
-
-
+    if request.method == 'GET':
+        return f"Merci d'utiliser le formulaire pour la visualisation"
+    elif request.method == 'POST':
+        form_data = request.form
+        return render_template('visualise.html', form_data=form_data )
 
 app.run()
