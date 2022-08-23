@@ -15,6 +15,8 @@ def visualise():
         return f"Merci d'utiliser le formulaire pour la visualisation"
     elif request.method == 'POST':
         form_data = request.form
-        return render_template('visualise.html', form_data=form_data )
+        prenom = form_data['Name']
+        date = form_data['date']
+        return render_template('visualise.html',**form_data)
 
 app.run()
