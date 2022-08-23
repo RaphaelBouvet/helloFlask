@@ -1,10 +1,16 @@
-from flask import Flask # import de l’objet Flask
+from flask import Flask, render_template
+from jinja2 import Environment
 
 app = Flask(__name__) # instantiation application
-@app.route("/")
 
+@app.route("/")
 def home():
-    return "<p>Bienvenue chez moi</p>" # association d’une route (URL) avec la fonction ‘home()’
-# on renvoie une chaîne de caractères
+    return  render_template ('index.html', title="L'Evaluateur de Prénom")
+
+@app.route("/visualise")
+def visualise():
+    return render_template('visualise.html', title = 'Raphaël', text = 'est un escargot tout chaud')
+
+
 
 app.run()
