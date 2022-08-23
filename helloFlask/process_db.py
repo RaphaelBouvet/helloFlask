@@ -34,7 +34,6 @@ def plot_nom(rgex,annee,dataframe):
     """
     recherche = dataframe[dataframe['prenom'].str.contains(rgex,regex=True)==True]   
     recherche = recherche[['nombre','annee']].groupby(['annee'],observed=True).sum().sort_index()
-    print(recherche)
     y_recherche = recherche.values
     x = [int(year) for year in recherche.index]
     

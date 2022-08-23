@@ -4,7 +4,6 @@ from os import system
 
 system('clear')
 
-
 db = process_database()
 app = Flask(__name__) 
 
@@ -25,4 +24,4 @@ def visualise():
         # return f"<img src='data:image/png;base64,{data}'/>"
         return render_template('visualise.html', image=img)
 
-app.run()
+app.run(debug=True)
