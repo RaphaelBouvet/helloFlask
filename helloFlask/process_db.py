@@ -1,11 +1,9 @@
-from turtle import color
 import pandas as pd
 import numpy as np
 from io import BytesIO
 import base64
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
-
 
 def process_database():
     pren = pd.read_csv('helloFlask/databases/dpt2020.zip', sep=";")  
@@ -53,6 +51,11 @@ def plot_nom(rgex,annee,dataframe):
     image = "data:image/png;base64,"
     image += base64.b64encode(buf.getvalue()).decode('utf8')
     return image
+
+def return_random(db):
+    l_unique = db['prenom'].unique()
+    prenom = np.random.choice(l_unique)
+    return prenom
 
 if __name__ == '__main__':
     print('Testing plots')

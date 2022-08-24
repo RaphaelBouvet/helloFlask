@@ -1,0 +1,20 @@
+<body>
+    <header>
+      {% include "_navigation.html" %}
+    </header>
+
+      <h1>Bienvenue dans le  {{ title }}!</h1>
+
+
+      <p>
+        Le generateur de prénom utilise les données de l'insee pour vous proposer un prénom
+      </p>
+      <br>
+      <form action="/generator" method="POST">
+
+        <p> <input type = "submit" value = "Generation" /></p>
+    </form>
+
+
+  </body>
+</html>

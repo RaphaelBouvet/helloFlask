@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <head>
-
-  <img src="{{ image }}"/>
-  <img src="{{url_for('static', filename='insee.png')}}"/>
+  <title> Occurence prénom </title>
+  <link rel="icon" type="image/png" sizes="16x16" href="https://www.1formatik.com/images/favicon/favicon-16x16.png">
 
 
 </head>
 
+<body>
+  <header>
+    <h1>Occurence Prénom</h1>
+  </header>
+  <left>
+    <img src="{{ image }}"/>
+    <br>
+    <img src="{{url_for('static', filename='insee.png')}}" alt='source insee 2020' height="80", width="100"/>
+  </left>
+</body>

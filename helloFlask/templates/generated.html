@@ -1,0 +1,19 @@
+<body>
+    <header>
+      {% include "_navigation.html" %}
+    </header>
+
+      <h1>Votre nouveau enfant se nomerra {{ prenom }}!</h1>
+      <img src="{{ image }}"/>
+      <p>
+        Regenerer un prénom
+      </p>
+      <br>
+      <form action="/generator" method="POST">
+
+        <p> <input type = "submit" value = "Generation" /></p>
+    </form>
+
+
+  </body>
+</html>
