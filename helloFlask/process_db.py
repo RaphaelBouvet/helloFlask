@@ -1,12 +1,15 @@
+from cgitb import reset
 import pandas as pd
 import numpy as np
 from io import BytesIO
 import base64
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import sqlite3
+
 
 def process_database():
-    pren = pd.read_csv('helloFlask/databases/dpt2020.zip', sep=";")  
+    pren = pd.read_csv('databases/dpt2020.zip', sep=";")  
 
     pren = pren.astype({'sexe':"category",
                         'preusuel':'O',
@@ -23,7 +26,6 @@ def process_database():
     pren = pren[pren['annee'].str.contains("XXXX")==False]
 
     return pren
-
 
 def plot_nom(rgex,annee,dataframe):
     """
@@ -57,7 +59,30 @@ def return_random(db):
     prenom = np.random.choice(l_unique)
     return prenom
 
+def connect_db_msg():
+    con = sqlite3.connect('databases/db_commentary.db')
+    db = pd.read_sql("SELECT * from comments", con,index_col='index',columns=['msg_string','msg_sentiment_analised'])
+    return db
+
+def save_msg(msg):
+    db = connect_db_msg()
+    user_id = len(db)
+    msg = pd.DataFrame(zip([msg],['nd']),columns=db.columns,index=[user_id])
+    con = sqlite3.connect('databases/db_commentary.db')
+    msg.to_sql("comments", con, if_exists='append')
+
+
 if __name__ == '__main__':
     print('Testing plots')
-    db = process_database()
-    plot_nom('raphael', 1993, db)
+    con = sqlite3.connect('databases/db_commentary.db')
+    db = pd.read_sql("SELECT * from comments", con,index_col='index',columns=['msg_string','msg_sentiment_analised'])
+    print(db)
+    msg = "j'aime pas le site"
+    user_id = len(db)
+    print(user_id)
+    msg = pd.DataFrame(zip([msg],['nd']),columns=['string','sentiment'])
+    print(msg)
+    db = pd.concat((db,msg)).reset_index(drop=True)
+    print(db)
+    con = sqlite3.connect('databases/db_commentary.db')
+    db.tail(1).to_sql("comments", con, if_exists='append')

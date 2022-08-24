@@ -1,7 +1,7 @@
 {# templates/_navigation.html #}
 
 <nav>
-{% for menu_item in ["index", "prenom", "generateur"] %}
+{% for menu_item in ["index", "prenom", "generateur", "about"] %}
   <a href="{{ url_for(menu_item) }}">{{ menu_item }}</a>
 {% endfor %}
 </nav>

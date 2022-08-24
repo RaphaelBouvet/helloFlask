@@ -8,11 +8,12 @@
 
 <body>
   <header>
+    {% include "_navigation.html" %}
     <h1>Occurence Prénom</h1>
   </header>
   <left>
     <img src="{{ image }}"/>
     <br>
-    <img src="{{url_for('static', filename='insee.png')}}" alt='source insee 2020' height="80", width="100"/>
+    <img src="{{url_for('static', filename='insee.png')}}" alt='source insee 2020' height="80", width="auto"/>
   </left>
 </body>

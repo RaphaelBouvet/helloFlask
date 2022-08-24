@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<body>
+    <header>
+      {% include "_navigation.html" %}
+    </header>
+    Comment as tu trouvé cette page ? 
+    <br>
+    <img src="{{url_for('static', filename='APO.gif')}}"/>
+
+    <form action="/", method="POST">
+        <p> Vous pouver laisser un commentaire ci dessous </p>
+        <p> <input type = "msg" value = "Votre commentaire içi" name="message"/></p>
+        <p> <input type = "submit" value = "Submit" /></p>
+    </form>
+</body>

@@ -1,15 +1,25 @@
-from flask import Flask, render_template,request
-from process_db import process_database,plot_nom, return_random
+from flask import Flask, render_template, request, flash
+from process_db import connect_db_msg, process_database,plot_nom, return_random, save_msg
 from os import system
 
 system('clear')
+secret_key='totally_secret_do_not_copy_key'
 
 db = process_database()
-app = Flask(__name__) 
 
-@app.route('/')
+app = Flask(__name__) 
+app.secret_key = secret_key
+
+@app.route('/', methods = ['POST','GET'])
 def index():
-    return render_template('base.html',title = 'Site de Raphaël')
+    if request.method == 'GET':
+        return render_template('base.html',title = 'Site de Raphaël')
+    elif request.method == 'POST':
+        flash('Merci pour le commentaire', category='info')
+        data = request.form
+        msg = data['message']
+        save_msg(msg)
+        return render_template('base.html',title = 'Site de Raphaël')
 
 @app.route("/prenom")
 def prenom():
@@ -37,5 +47,8 @@ def generateur():
         img = plot_nom(prenom,2020,db)
         return render_template('generated.html', prenom=prenom, image=img)
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 app.run(debug=True)
